@@ -14,7 +14,7 @@
 - Write out your own graphical model on paper for the Normal model
 - Take a picture of your graphical model
 - Now, write out the Rev code to specify this model
-- Set up an MCMC analysis for this model using the built-in MCMC machineary in RevBayes
+- Set up an MCMC analysis for this model using the built-in MCMC machinery in RevBayes
 - Save your commands in a text file that can be run from the command line
 - Run your analysis
 - Open your log file in Tracer and examine the results. Do you feel confident in your estimates?
