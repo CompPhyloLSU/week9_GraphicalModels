@@ -1,0 +1,36 @@
+clear()
+
+# Parameters of beta prior on p
+alpha <- 1
+beta <- 1
+
+# Beta prior on p
+p ~ dnBeta(alpha,beta)
+
+# Defining the data
+obs <- [1,0,0,1,0,1]
+
+# Clamping our data
+for (i in 1:6){
+    obsNodes[i] ~ dnBernoulli(p)
+    obsNodes[i].clamp(obs[i])
+}
+
+# Create model object
+myModel = model(alpha)
+
+# Set up slide move for p
+moves[1] = mvSlide(p,delta=0.1,weight=1)
+
+# Set up screen and file monitors
+monitors[1] = mnScreen(printgen=1000,p)
+monitors[2] = mnModel(filename="binomialMCMC.log",printgen=100)
+
+# Create MCMC object
+myMCMC = mcmc(myModel, moves, monitors)
+
+# Run MCMC!
+myMCMC.run(100000)
+
+# Quit when MCMC complete
+quit()
