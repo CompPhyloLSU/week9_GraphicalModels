@@ -1,0 +1,42 @@
+#Setting mean (m) and standard deviation (sd)
+
+m ~ dnUnif(0,25)
+sd ~ dnUnif(0,4)
+m
+sd
+
+#Drawing a value from a normal dist on a stochastic node
+z ~ dnNormal(m,sd)
+z
+
+for (i in 1:10){
+    obs[i] ~ dnNormal(m, sd)
+}
+obs
+
+
+obs = [ 25.915, 23.630, 21.540, 21.495, 22.366, 23.696, 25.283, 20.525, 21.344, 21.505 ]
+for (i in 1:obs.size()){
+    obsNodes[i] ~ dnNormal(23.48396, 2.65924)
+    obsNodes[i].clamp(obs[i])
+}
+
+##Using this statement to specify our model, which really is just specifying a place for our chain to start
+myModel = model(sd)
+
+#We use this statement to decide which moves should be made in order to keep track of our chain.
+moves[1] = mvSlide(m,delta=0.01,weight=1)
+
+# If there were other parameters to infer, we could add additional moves here.
+
+monitors[1] = mnScreen(printgen=100,m)
+
+# If we were running this analysis from the command line, we could also add a monitor that prints to file
+# However, this doesn't seem to work from inside a Jupyter notebook
+monitors[2] = mnModel(filename="Teddy_week9_NormalDist_MCMC.log",printgen=1000, sep = TAB)
+
+#Creating my MCMC
+myMCMC = mcmc(myModel, moves, monitors)
+
+#We will run our chain for 10000 generations
+myMCMC.run(10000)
