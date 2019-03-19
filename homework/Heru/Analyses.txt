@@ -1,0 +1,5 @@
+My Model Result
+
+I setup a normal distribution model using two sets of uniform priors to get the mean value and sd value for the normal distribution model. In the first run, the prior was too high. It was failed to reach stable MCMC runs. I optimized the prior with different settings. The value 0-0.5 for m and 0-0.3 for sd are the closest I could get to reach a stable run. I feel more confident with this result. 
+
+#side note: I failed to run RevBayes on Terminal. It did not recognized the p parameter for the MCMC runs. I ran it on Jupiter Notebook instead and able to print the log file.
