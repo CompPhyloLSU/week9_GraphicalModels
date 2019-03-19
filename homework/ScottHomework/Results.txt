@@ -1,0 +1,6 @@
+The broad search haWs a smaller range in the trace plot than the narrow search. This could be due to the narrow search trying to make moves outside of the
+search range, making it more difficult to move. Both analyses do display "fuzzy catepillar" shapes. Looking through the MCMC output in revbayes, 
+there is very small movement and it tends to stabilize within 2000 repetitions. While it is possible that this is continuously occuring due to some 
+super efficient algorithm, it is more likely an issue with the dnNorm command being used to draw values after the parameters for it are drawn from 
+a uniform distribution. I tried to use both dnorm and rnorm with 10 draws, but the yeilded the same result as the dnNorm that was used in the for loop.
+There is some error that I just cannot recognize. Both of the MCMC runs do wind up converging on a result though, which is good. 
