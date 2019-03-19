@@ -1,6 +1,6 @@
 #I draw mean and sd value from uniform prior
-m ~ dnUnif(0,10)
-sd ~ dnUnif(0,5)
+m ~ dnUnif(0,5)
+sd ~ dnUnif(0,1)
 
 #Make up observed data
 z <- [ 5.7, 3.8, 3.7, 4.7, 3.9, 12.8, 6, 6, 6, 6]
@@ -18,7 +18,7 @@ myStart = model(m)
 moves[1] = mvSlide(m,delta=0.1,weight=1)
 moves[2] = mvSlide(sd,delta=0.1,weight=1)
 monitors[1] = mnScreen(printgen=1000,m)
-monitors[2] = mnModel(filename="binomialMCMC.log",printgen=100)
+monitors[2] = mnModel(filename="binomialMCMC2.log",printgen=100)
 myMCMC = mcmc(myStart, moves, monitors)
 myMCMC.run(1000000)
 
