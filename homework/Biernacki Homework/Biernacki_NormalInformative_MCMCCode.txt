@@ -1,0 +1,32 @@
+clear()
+
+obs <- [29.6, 34.1, 36.9, 27.5, 33.2, 30.3, 30.1, 34.3, 31.0, 27.0]
+trueMean = mean(obs)
+trueMean
+trueSD = stdev(obs)
+trueSD
+
+mPrior1 <- 20
+mPrior2 <- 40
+sdPrior1 <- 2
+sdPrior2 <- 5
+
+m ~ dnUniform(mPrior1,mPrior2)
+sd ~ dnUniform(sdPrior1,sdPrior2)
+m
+sd
+
+
+for (i in 1:10){
+    obsNodes[i] ~ dnNormal(m,sd)
+    obsNodes[i].clamp(obs[i])
+}
+obsNodes
+
+myModel = model(mPrior1)
+moves[1] = mvSlide(m,delta=0.1,weight=1)
+moves[2] = mvSlide(sd,delta=0.01,weight=1)
+monitors[1] = mnScreen(printgen= 1000,m)
+myMCMC = mcmc(myModel, moves, monitors)
+
+myMCMC.run(30000)

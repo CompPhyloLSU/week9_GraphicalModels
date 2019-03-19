@@ -1,0 +1,7 @@
+Unfortunately, I couldn't figure out how to open RevBayes in the command line. I know we talked about how to do this in class, but I couldn't remember. I tried manually making Log files by copying the output from my Jupyter Notebook (see the saved .log files), but Tracer couldn't read them.
+
+I just looked at my results and saw whether or not they converged by eye. By looking at these results, I felt confident in my estimate of the mean, which tended to converge fairly quickly and accurately on the true mean. I had to play with the delta variable, because a very small delta meant the mean estimate increased very little in every move, and it never converged on the true mean. But now I feel confident in the estimate.
+
+However, for some reason standard deviation never converged well, and tended to overestimate the sd by about 0.5 or so. That doesn't seem like a lot, but when we're talking about a number between 0 and 4, I feel it kind of is.
+
+I assumed that making my priors more informative (changing mean priors to between 20 and 40, and sigma priors to between 2 and 5), meant that the MCMC would converge on the true value more quickly. Although it did usually start close to the true value and therefore had a less precipitous change in the first few moves, it seemed like it still took about the same amount of time to comfortably settle in for both mean and standard deviation. Standard deviation was still overestimated with more specific priors. Maybe I should have made the prior even smaller, between 3 and 4, and made delta very small.
