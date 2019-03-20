@@ -1,0 +1,21 @@
+m ~ dnUnif(50, 1000) 
+s ~ dnUnif(2, 10)
+
+
+d ~ dnNormal(m,s)
+obs<-[18.965, 111.561, 71.960, 63.934, 30.722, 97.852, 214.653, 82.795, 100.841, 24.573, 130.634, 110.502, 122.128, 43.934, 166.543, 34.058, 108.336, 148.789,
+   77.910, 133.045, 63.266, 98.973, 129.174, 168.850, 113.592 ]
+for (i in 1:25){
+    obsNodes[i] ~ dnNormal(d)
+    obsNodes[i].clamp(obs[i])
+}
+
+myModel = model(d)
+moves[1] = mvSlide(m,delta=0.5,weight=1)
+moves[2] = mvSlide(s,delta=0.5,weight=1)
+
+monitors[1]= mnScreen(printgen=100,m)
+monitors[2]= mnModel(filename="mansaray_code_mcmc2.log",printgen=1000)
+
+myMCMC= mcmc(myModel,moves,monitors) 
+myMCMC.run(1000000)
