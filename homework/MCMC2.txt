@@ -1,0 +1,27 @@
+mu_min <- 8.0
+mu_max <- 15.0
+mu ~ dnUniform(mu_min,mu_max)
+
+sigma_min <- 2.0
+sigma_max <- 4.0
+sigma ~ dnUniform(sigma_min,sigma_max)
+
+myData <- [12.31,10.62,12.46,13.95,8.54,13.83,13.25,14.10,12.55,14.95]
+for (i in 1:myData.size()){
+d[i] ~ dnNormal(mu, sigma)
+d[i].clamp(myData[i])
+}
+
+myModel = model(sigma_min)
+moves[1] = mvSlide(mu,delta=0.1,weight=1)
+moves[2] = mvSlide(sigma,delta=0.1,weight=1)
+
+monitors[1] = mnScreen(printgen=100,mu)
+monitors[2] = mnModel(filename="MCMC.log",printgen=100)
+
+myMCMC = mcmc(myModel, moves, monitors)
+
+myMCMC.run(10000)
+
+
+Better reads this time, fuzzy caterpillar visible in Tracer and convergence apparent in density graphs. Reduced range for mu from 0-50 to 8-15 based on myData and sigma from 0-4 to 2-4.
