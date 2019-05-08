@@ -1,0 +1,19 @@
+###Notes for Week 9 Exercise
+
+#Creating an MCMC analysis for a Normal Distribution
+
+#My original model included two stochastic nodes for mean (m) and standard deviation (sd), obtained from 2 "fixed" or constant values from 0 to 25 for mean and 0 to 4 for sd
+
+Discussion of Tracer plots from first run output (log file) for the first run of 10000 generations on MCMC analysis:
+-Initial values for mean and sd were obtained with the statements:
+m ~ dnUnif(0,25) = 13.18109
+sd ~ dnUnif(0,4) = 1.870544
+-My first set of random observations based on a for loop using a normal distribution with the values of m and sd drawn above were: [ 25.915, 23.630, 21.540, 21.495, 22.366, 23.696, 25.283, 20.525, 21.344, 21.505 ]. These values were clamped to each new draw from a normal distribution in our stochastic node for my "d" plate .
+-Tracer showed a normal distribution of my values of m ranging from 13 to 16 and sd ranging from 2 to 4.
+-I got the hairy peaks for the "Trace" plot of my priors, posteriors, means, and sd estimates, meaning that my sampling and moves were somewhat acceptable.
+
+Dicussion of Tracer plots after new priors were added:
+-I selected values for new priors of m and sd based on the results from my first run. I used m ~ dnUnif(13,16) to ramdonly draw a new value for m
+and sd ~ dnUnif(2,4) for sd based on the results of my first run.
+-New set of priors to be clamped: I clamped the same set of values (obs) as before [ 25.915, 23.630, 21.540, 21.495, 22.366, 23.696, 25.283, 20.525, 21.344, 21.505 ]. The new analysis was ran using the same values of mean and standard deviation as above.
+-When the new set of priors was used, the marginal density of the mean improved a little, being somewhat more prominent in the midpoint of the distribution "hill" and a new estimate of the mean was calculated. The marginal density increased for the second run with new priors. The two distributions overlaped a little, suggesting that if more analysis are ran, with new (improved) priors we would have closer distributions.
