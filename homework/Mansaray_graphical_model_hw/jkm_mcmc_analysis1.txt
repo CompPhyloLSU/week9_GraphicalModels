@@ -1,0 +1,16 @@
+Statistical Summary
+mean	-11.93
+stderr of mean	0.0867
+stdev	1.1674
+variance	1.3627
+median	-12.1221
+value range	[-15.7868, -4.6889]
+geometric mean	n/a
+95% HPD interval	[-13.9439, -9.1892]
+auto-correlation time (ACT)	4973.9125
+effective sample size (ESS)	181.1
+number of samples	901
+
+I'm not totally confident in my results. The values of the mean and HPD are negative and the estimates graph is to the left. 
+However, there doesn't seem to be a trend in the trace and it does resemble the "fuzzy caterpillar" we talked about in class. I think providing more informative priors could clarify the results. 
+The peaks go up and down but I had a difficult time adjusting my proposals to get it to look the way it does. 
