@@ -1,0 +1,15 @@
+Summary Statistic	Posterior
+mean	-10484.4747
+stderr of mean	0.2475
+stdev	0.779
+variance	0.6068
+median	-10484.7
+value range	[-10485.1, -10480.7]
+geometric mean	n/a
+95% HPD interval	[-10485.1, -10483]
+auto-correlation time (ACT)	928.5821
+effective sample size (ESS)	9.8
+number of samples	91
+
+
+These are the results from the first MCMC. I did not get a fuzzy caterpillar, and the graph of the estimates was skewed to the left. 
