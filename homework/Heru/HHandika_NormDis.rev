@@ -1,0 +1,25 @@
+#I draw mean and sd value from uniform prior
+m ~ dnUnif(0,10)
+sd ~ dnUnif(0,5)
+
+#Make up observed data
+z <- [ 5.7, 3.8, 3.7, 4.7, 3.9, 12.8, 6, 6, 6, 6]
+
+#Setup for loop. Clamped it with normal distribution
+for (i in 1:10){
+    obs[i] ~ dnNormal(m,sd)
+    obs[i].clamp(z[i])
+}
+
+#Setup MCMC Run. Define model first. I used m as a starting point
+myStart = model(m)
+
+#Run MCMC for 10000 generation, draw every 100 generation
+moves[1] = mvSlide(m,delta=0.1,weight=1)
+moves[2] = mvSlide(sd,delta=0.1,weight=1)
+monitors[1] = mnScreen(printgen=1000,m)
+monitors[2] = mnModel(filename="binomialMCMC.log",printgen=100)
+myMCMC = mcmc(myStart, moves, monitors)
+myMCMC.run(1000000)
+
+

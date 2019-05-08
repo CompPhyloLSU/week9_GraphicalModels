@@ -1,0 +1,3 @@
+My Model Result
+
+I setup a normal distribution model using two sets of uniform priors to get the mean value and sd value for the normal distribution model. In the first run, the prior was quite high. I optimized the prior by lowering the value. The value 0-5 for m and 0-1 for sd are the value that reach the best result. I ran it twice to check for convergent. Both runs resulted identical results. I feel more confident with this result. 
