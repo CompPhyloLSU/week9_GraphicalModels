@@ -1,0 +1,51 @@
+#taken from some random draws we did last week
+actual_data<-[10.269, 10.289, 9.590, 11.107, 9.434, 10.590, 11.117, 9.092, 9.451, 9.683]
+
+#priors: constant nodes
+mean_min<-0
+mean_max<-50
+sd_min<-0
+sd_max<-4
+
+#mean and standard deviation drawn from the prior distributions: stochastic nodes
+m ~ dnUniform(mean_min, mean_max)
+s ~ dnUniform(sd_min, sd_max)
+
+#clamped node for the normal distribution, plate across multiple observed draws
+for (i in 1:actual_data.size()){
+    observed_result[i] ~ dnNormal(m, s)
+    observed_result[i].clamp(actual_data[i])
+    }
+
+#set up the MCMC
+myModel = model(sd_min)
+moves[1] = mvSlide(m,delta=0.5,weight=1)
+moves[2] = mvSlide(s,delta=0.1,weight=1)
+monitors[1] = mnScreen(printgen=100,m)
+monitors[2] = mnScreen(printgen=100,s)
+monitors[3] = mnModel(filename="normal_logfile1.log",printgen=100)
+myMCMC = mcmc(myModel, moves, monitors)
+
+#run the MCMC
+myMCMC.run(100000)
+
+#do it all again with different, more informative priors
+
+mean_min2<-0
+mean_max2<-20
+sd_min2<-0
+sd_max2<-2
+m2 ~ dnUniform(mean_min2, mean_max2)
+s2 ~ dnUniform(sd_min2, sd_max2)
+for (i in 1:actual_data.size()){
+    observed_result2[i] ~ dnNormal(m2, s2)
+    observed_result2[i].clamp(actual_data[i])
+    }
+myModel2 = model(sd_min2)
+moves2[1] = mvSlide(m2,delta=0.5,weight=1)
+moves2[2] = mvSlide(s2,delta=0.1,weight=1)
+monitors2[1] = mnScreen(printgen=100,m2)
+monitors2[2] = mnScreen(printgen=100,s2)
+monitors2[3] = mnModel(filename="normal_logfile2.log",printgen=100)
+myMCMC2 = mcmc(myModel2, moves2, monitors2)
+myMCMC2.run(100000)

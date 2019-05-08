@@ -1,0 +1,13 @@
+When I look at the tracer file after 100,000 generations (as shown here)
+I am quite confident in the estimation of the parameters. When I use
+1,000,000 generations I get the same result and a fairly similar tracer file.
+However, at 10,000 generations the parameter estimates were fairly similar but the
+tracer file did not yet look like it had converged, so I would be less confident
+in those parameter estimates. My more informative prior was simply a narrower range
+for the uniform distribution, so it is possible that it did not substantially
+affect the overall MCMC, at least not past the beginning of the burnin. For the
+10,000 generation run the chain looked somewhat better with the more informative
+prior, but for the longer runs they seem essentially the same. Probably it would
+be necessary to have a much more informative prior (either a much narrower
+uniform distribution or something like a normal distribution) to see much of a
+change in the final results after a long MCMC chain.
