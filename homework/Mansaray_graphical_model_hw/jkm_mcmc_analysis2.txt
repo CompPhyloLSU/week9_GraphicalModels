@@ -1,0 +1,15 @@
+Statistical Summary 
+mean	-12.0308
+stderr of mean	0.0494
+stdev	0.7291
+variance	0.5316
+median	-11.9537
+value range	[-15.0937, -10.5704]
+geometric mean	n/a
+95% HPD interval	[-13.5131, -10.6924]
+auto-correlation time (ACT)	4139.3134
+effective sample size (ESS)	217.7
+number of samples	901
+
+After closing in on the proposals, the trace became more compact. The estimates graph shifted more to the right. 
+I am more confident in this analysis because it seems that the more informative priors honed in on a more precise mean. 
