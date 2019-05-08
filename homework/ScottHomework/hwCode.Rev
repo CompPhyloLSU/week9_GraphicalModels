@@ -1,0 +1,28 @@
+
+mu ~ dnUnif(0,30)
+mu
+sigma ~ dnUnif(2,4)
+sigma
+N = 10
+for(i in 1:N){
+    data[i] ~ dnNorm(mu, sigma)
+}
+data
+mu ~ dnUnif(0,30)
+mu
+sigma ~ dnUnif(2,4)
+sigma
+
+for(i in 1:N){
+    
+    d[i] ~ dnNorm(mu,sigma)
+    d[i] .clamp(data[i])
+}
+d
+Model1 = model(sigma)
+moves[1] = mvSlide(mu, delta = .5, weight = 1)
+moves[2] = mvSlide(sigma, delta = .5, weight = 1)
+monitors[1] = mnScreen(printgen = 10000, mu, sigma)
+monitors[2] = mnModel(filename="hwCode.log",printgen=1000, separator = "	")
+MCMC = mcmc(Model1, moves, monitors)
+MCMC.run(1000000)
